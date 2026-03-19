@@ -74,6 +74,7 @@ def upload_file():
         return "Invalid file type. Supported types: .xlsx", 400
 
     df = pandas.read_excel(file)
+    df = df.replace(r'\r\n|\r|\n', ' ', regex=True)
     base = Path(file.filename).stem
     format = request.form['format']
     mode = request.form.get('mode', 'document')
@@ -237,7 +238,7 @@ def convert_to_docx(base, df):
 
     for i, row in df.iterrows():
         if request.form.get('page_numbers', 'no') == 'yes':
-            hp = document.add_paragraph(base + ' | Row ' + str(i + 1) + ' of ' + str(len(df)) + '\n')
+            hp = document.add_paragraph(base + ' | Row ' + str(i + 1) + ' of ' + str(len(df)))
             insert_hr_docx(hp)
         last_p = None
         for col in df.columns:
