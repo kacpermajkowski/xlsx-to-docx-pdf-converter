@@ -1,6 +1,7 @@
-To start, run 
+To start, open Powershell or Terminal app in directory with the software and run these commands:
 ```
-start.ps1
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+./start.ps1
 ```
 
 Authors:
